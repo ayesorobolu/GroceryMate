@@ -30,7 +30,7 @@ const ProductDetails = () => {
             <p>
                 <Link to={"/"}>Home</Link> /
                 <Link to={"/products"}> Products</Link> /
-                <Link to={`products/${product.category.toLowerCase()}`}> {product.category}</Link> /
+                <Link to={`/products/${product.category.toLowerCase()}`}> {product.category}</Link> /
                 <span className="text-[var(--color-primary)]"> {product.name}</span>
             </p>
 
