@@ -1,4 +1,5 @@
-import  bcrypt from 'bcrypt';
+import User from '../models/User.js';
+import  bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 //register user 
@@ -30,7 +31,7 @@ try {
         httpOnly: true, //prevent javascript access to the cookie
         secure: process.env.NODE_ENV === 'production',//use secure cookies in production
         sameSite:process.env.NODE_ENV === 'production' ? 'none' : 'strict', //CSRF Protection 
-        maxAge: 7 * 24 * 60 * 60 * 1000 //cookire expiration time in 7 days
+        maxAge: 7 * 24 * 60 * 60 * 1000, //cookire expiration time in 7 days
     });
 
     return res.json({success:true, user: {email:user.email, name: user.name}})
