@@ -24,3 +24,14 @@ export const addProduct = async (req, res) => {
     res.json({success:false, message:error.message})
  }
 }
+
+//Get product : /api/products/get
+export const productList = async (req,res) => {
+    try {
+        const products = await Product.find()
+        res.json({success:true, products})
+    } catch (error) {
+        console.log(error.message)
+        res.json({success:false, message:error.message})
+    }
+}
