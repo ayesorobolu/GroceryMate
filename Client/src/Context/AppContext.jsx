@@ -1,6 +1,5 @@
 import {createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyProducts } from "../assets/assets";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
@@ -122,6 +121,24 @@ export const AppContextProvider = ({children}) => {
         fetchProducts();
         fetchUser();
     },[]);
+
+    //update cart items
+    useEffect(() => {
+        const updateCart = async () => {
+            try {
+               const {data} = await axios.post("/api/cart/update", {cartItems})
+               if(!data.success){
+                toast.error(data.message)
+               }
+            } catch (error) {
+                toast.error(error.message)
+            }
+        }
+        
+        if(user){
+            updateCart();
+        }
+    },[cartItems]);
 
     const value = {navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart,
        updateCartItem,removeFromCart,cartItems, searchQuery, setSearchQuery, getCartAmount,getCartCount, axios, fetchProducts}
