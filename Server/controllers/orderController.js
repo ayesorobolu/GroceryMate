@@ -106,11 +106,11 @@ export const placeOrderStripe = async (req, res) => {
 }
 
 //stripe webhooks to verify payments action : /stripe
-export const stripeWebhook = async (request, response) => {
+export const stripeWebhooks = async (request, response) => {
    //Stripe gateway initialize
    const stripeInstance  = new stripe(process.env.STRIPE_SECRET_KEY);
   
-   const sig = req.headers['stripe-signature'];
+   const sig = request.headers['stripe-signature'];
    let event;
 
    try {
